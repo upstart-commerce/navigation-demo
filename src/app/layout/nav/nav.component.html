@@ -1,0 +1,8 @@
+<button class="menu-mobile-toggle" (click)="onToggleMenu()"><i class="las la-bars"></i></button>
+<div class="nav" [ngClass]="{show: toggle}">
+    <ng-container *ngIf="navigation$ | async as menus">
+      <ng-container *ngFor="let menu of menus">
+        <app-nav-item  [menu]="menu" (menuClick)="toggle = false"></app-nav-item>
+      </ng-container>
+    </ng-container>
+</div>

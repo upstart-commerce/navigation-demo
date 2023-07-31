@@ -1,0 +1,46 @@
+<div class="col-3-layout" *ngIf="menu">
+  <ng-container *ngIf="!hasComponents">
+    <ng-container *ngFor="let child of menu.children;let i = index">
+      <div [ngStyle]="{width: menu.subMenuLayout.columns['column_'+(i + 1)]?.width + '%'}" [ngClass]="menu.subMenuLayout.columns['column_'+(i + 1)]?.['orientation']">
+        <app-nav-item *ngIf="menu.subMenuLayout.columns['column_'+(i + 1)]?.components.length === 0" [menu]="child" class="child"></app-nav-item>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="hasComponents">
+    <div *ngIf="menu.subMenuLayout.columns['column_1'].components?.length === 0" [ngStyle]="{width: menu.subMenuLayout.columns['column_1'].width + '%'}">
+      <div [ngClass]="menu.subMenuLayout.columns['column_1']?.['orientation']">
+        <ng-container *ngFor="let child of menu.children | slice:sliceParams[0][0]:sliceParams[0][1];let i = index">
+          <app-nav-item [menu]="child" class="child"></app-nav-item>
+        </ng-container>
+      </div>
+    </div>
+
+    <div *ngIf="menu.subMenuLayout.columns['column_1'].components?.length > 0" [ngStyle]="{width: menu.subMenuLayout.columns['column_1'].width + '%'}">
+      <ng-container *ngFor="let component of menu.subMenuLayout.columns['column_1'].components" [appCMSComponent]="component"></ng-container>
+    </div>
+
+    <div *ngIf="menu.subMenuLayout.columns['column_2'].components?.length === 0 && menu.children.length > 0" [ngStyle]="{width: menu.subMenuLayout.columns['column_2'].width + '%'}">
+      <div [ngClass]="menu.subMenuLayout.columns['column_2']?.['orientation']">
+        <ng-container *ngFor="let child of menu.children | slice:sliceParams[1][0]:sliceParams[1][1];let i = index">
+          <app-nav-item [menu]="child" class="child"></app-nav-item>
+        </ng-container>
+      </div>
+    </div>
+
+    <div *ngIf="menu.subMenuLayout.columns['column_2'].components?.length > 0" [ngStyle]="{width: menu.subMenuLayout.columns['column_2'].width + '%'}">
+      <ng-container *ngFor="let component of menu.subMenuLayout.columns['column_2'].components" [appCMSComponent]="component"></ng-container>
+    </div>
+
+    <div *ngIf="menu.subMenuLayout.columns['column_3'].components?.length === 0" [ngStyle]="{width: menu.subMenuLayout.columns['column_3'].width + '%'}">
+      <div [ngClass]="menu.subMenuLayout.columns['column_3']?.['orientation']">
+        <ng-container *ngFor="let child of menu.children | slice:sliceParams[2][0]:sliceParams[2][1];let i = index">
+          <app-nav-item [menu]="child" class="child"></app-nav-item>
+        </ng-container>
+      </div>
+    </div>
+
+    <div *ngIf="menu.subMenuLayout.columns['column_3'].components?.length > 0" [ngStyle]="{width: menu.subMenuLayout.columns['column_3'].width + '%'}">
+      <ng-container *ngFor="let component of menu.subMenuLayout.columns['column_3'].components" [appCMSComponent]="component"></ng-container>
+    </div>
+  </ng-container>
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuFacadeService } from './services/menu/menuFacade.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'navigation-demo';
+
+  constructor(private menuService: MenuFacadeService) {
+    this.menuService.getMenus();
+  }
 }

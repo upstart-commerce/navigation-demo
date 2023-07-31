@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  flex: 1 1 auto;
+}
+
+.col-2-layout {
+  display: flex;
+}
+
+.horizontal {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}

@@ -1,0 +1,127 @@
+@import '/src/styles/theme-variables.scss';
+@import 'functions';
+
+:host {
+  padding: 0 1.5625rem 0;
+  font-size: 0.875rem;
+  position: relative;
+  z-index: 10;
+  background: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.07);
+
+  @include media-breakpoint-down(sm) {
+    padding: 0 1rem;
+  }
+}
+
+.user-login {
+  font-size: 24px;
+}
+
+.top-info-block {
+  flex: 1 1 100%;
+  background: $secondary;
+  text-align: center;
+  color: #fff;
+  font-family: 'Archivo Black';
+  font-weight: bold;
+  font-size: 12px;
+  height: 36px;
+  line-height: 36px;
+  margin: 0 -25px 0px;
+  display: flex;
+  align-items: center;
+
+  @include media-breakpoint-down(sm) {
+    margin: 0 -1rem 1rem;
+  }
+}
+
+.top-info-block > div,
+.header-wrap {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 15px;
+  position: relative;
+}
+
+.find-store {
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  a {
+    color: #ffffff;
+    font-weight: normal;
+  }
+}
+
+.nav-container {
+  align-self: center;
+  max-width: 40.375rem;
+}
+
+.nav-container,
+.right-container {
+  @include media-breakpoint-up(md) {
+    flex-grow: 1;
+    width: 40%;
+  }
+}
+
+.logo-container {
+  text-align: center;
+  margin-right: 2rem;
+  padding-top: 0.625rem;
+
+  @include media-breakpoint-down(sm) {
+    margin-right: auto;
+  }
+
+  img {
+    height: 3.125rem;
+    width: 4.375rem;
+  }
+}
+
+.right-container {
+  text-align: right;
+  justify-content: flex-end;
+  align-self: center;
+  gap: 3.125rem;
+
+  @include media-breakpoint-down(sm) {
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+
+    & > * {
+      margin: 0 10px;
+    }
+
+    app-mobile-search-block {
+      order: -1;
+    }
+  }
+}
+
+.customer-block {
+  display: none;
+
+  i {
+    font-size: 18px;
+    margin-right: 4px;
+  }
+}
+
+.logou-btn {
+  background: none;
+  padding: 4px;
+  border: none;
+  cursor: pointer;
+  vertical-align: middle;
+
+  i {
+    margin: 0;
+  }
+}

@@ -1,0 +1,16 @@
+<div class="main" [style.justify-content]="text_box_position == 'right' ? 'flex-start':'flex-end'">
+  <img [src]="img">
+  <div *ngIf="text" class="text-block-container" [style.background-color]="background_color" [ngClass]="text_box_position == 'right' ? 'right' : 'left'" >
+    <div class="text-block">
+      <div [innerHTML]="text">
+      </div>
+      <a  class="btn"
+      [style.color]="call_to_action_text_color"
+      [style.background-color]="call_to_action_color"
+          [href]="link"
+          [target]="link_target ? '_blank' : '_self'">
+        {{call_to_action_text}}
+      </a>
+    </div>
+  </div>
+</div>

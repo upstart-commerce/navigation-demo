@@ -1,0 +1,10 @@
+<div>
+  <a
+    class="btn"
+    [href]="link"
+    [target]="openNewTab ? '_blank' : '_self'"
+    [ngClass]="{'btn-small': size === 'small_size', 'btn-block': size === 'large_size'}"
+    [ngStyle]="{color: textColor, backgroundColor: buttonColor, borderColor: buttonColor}">
+    {{ text }}
+  </a>
+</div>

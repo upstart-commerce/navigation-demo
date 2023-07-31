@@ -1,0 +1,32 @@
+<div [ngClass]="{'flex-row': orientation === 'vertical', 'flex-column': orientation === 'horizontal'}">
+  <dl *ngFor="let column of linksColumn">
+    <dt>
+      <a
+        *ngIf="column.attributes.field_link as fieldLink;"
+        [target]="column.attributes.field_open_in_new_tab ? '_blank' : '_self'"
+        [href]="fieldLink.uri">
+        {{column.attributes.field_heading}}
+      </a>
+      <ng-container *ngIf="!column.attributes.field_link">
+        <ng-container
+          *ngTemplateOutlet="linkTitle; context : {$implicit: column.attributes.field_heading}">
+        </ng-container>
+      </ng-container>
+    </dt>
+    <dd *ngFor="let link of fieldLinks(column)">
+      <a
+        *ngIf="link.attributes.field_link as fieldLink; else linkTitle"
+        [target]="link.attributes.field_open_in_new_tab ? '_blank' : '_self'"
+        [href]="fieldLink.uri">
+        {{link.attributes.field_link_text}}
+      </a>
+      <ng-container *ngIf="!column.attributes.field_link">
+        <ng-container
+          *ngTemplateOutlet="linkTitle; context : {$implicit: link.attributes.field_link_text}">
+        </ng-container>
+      </ng-container>
+    </dd>
+  </dl>
+</div>
+
+<ng-template #linkTitle let-text>{{text}}</ng-template>

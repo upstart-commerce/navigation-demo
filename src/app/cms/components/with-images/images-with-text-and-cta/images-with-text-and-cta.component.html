@@ -1,0 +1,19 @@
+<div class="main">
+  <div>
+    <img [src]="img" [style.height]="img_height ? img_height+'px' : 'auto'" [style.width]="img_width  ? img_width+'px' : 'auto'">
+    <div class="text-block-container">
+      <div class="text-block {{text_box_position}}"  [ngClass]="text_box_position_vertical == 'center' ? 'v-center' : text_box_position_vertical">
+        <div [innerHTML]="text">
+        </div>
+        <a  class="btn"
+        [style.color]="call_to_action_color"
+        [style.background-color]="call_to_action_text_color"
+            [href]="link"
+            [target]="link_target ? '_blank' : '_self'">
+          {{call_to_action_text}}
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>

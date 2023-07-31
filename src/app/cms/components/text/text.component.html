@@ -1,0 +1,46 @@
+<ng-container *ngIf="hasButtonConfig">
+  <div [ngSwitch]="buttonPosition">
+    <ng-container *ngSwitchCase="'above'">
+      <div class="d-flex flex-column">
+        <ng-container [ngTemplateOutlet]="button"></ng-container>
+        <div class="pad-t-15" [innerHTML]="text"></div>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'below'">
+      <div class="d-flex flex-column">
+        <div class="mb-15" [innerHTML]="text"></div>
+        <ng-container [ngTemplateOutlet]="button"></ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'left'">
+      <div class="d-flex align-items-top">
+        <ng-container [ngTemplateOutlet]="button"></ng-container>
+        <div class="ml-15" [innerHTML]="text"></div>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'right'">
+      <div class="d-flex align-items-top ">
+        <div class="mr-15" [innerHTML]="text"></div>
+        <ng-container [ngTemplateOutlet]="button"></ng-container>
+      </div>
+    </ng-container>
+    <div *ngSwitchDefault>output2</div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!hasButtonConfig">
+  <div [innerHTML]="text"></div>
+</ng-container>
+
+<ng-template #button>
+  <div>
+    <a
+      class="btn"
+      [href]="link"
+      [target]="openNewTab ? '_blank' : '_self'"
+      [ngClass]="{'btn-small': size === 'small_size', 'btn-block': size === 'large_size'}"
+      [ngStyle]="{color: textColor, backgroundColor: buttonColor, borderColor: buttonColor}">
+      {{ buttonText }}
+    </a>
+  </div>
+</ng-template>

@@ -1,0 +1,30 @@
+<div class="col-2-layout" *ngIf="menu">
+  <ng-container *ngIf="!hasComponents">
+    <ng-container *ngFor="let child of menu.children;let i = index">
+      <app-nav-item [menu]="child" class="child"></app-nav-item>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="hasComponents">
+    <div *ngIf="menu.subMenuLayout.columns['column_1'].components?.length === 0" class="horizontal" [ngStyle]="{width: menu.subMenuLayout.columns['column_1'].width + '%'}">
+      <ng-container *ngFor="let child of menu.children;let i = index">
+        <app-nav-item [menu]="child" class="child"></app-nav-item>
+      </ng-container>
+      
+    </div>
+    <div *ngIf="menu.subMenuLayout.columns['column_1'].components?.length > 0" [ngStyle]="{width: menu.subMenuLayout.columns['column_1'].width + '%'}">
+      <ng-container *ngFor="let component of menu.subMenuLayout.columns['column_1'].components" [appCMSComponent]="component"></ng-container>
+    </div>
+
+    <div *ngIf="menu.subMenuLayout.columns['column_2'].components?.length === 0" [ngStyle]="{width: menu.subMenuLayout.columns['column_2'].width + '%'}">
+      
+      <ng-container *ngFor="let child of menu.children;let i = index">
+        <div>
+          <app-nav-item [menu]="child" class="child"></app-nav-item>
+        </div>
+      </ng-container>
+    </div>
+    <div *ngIf="menu.subMenuLayout.columns['column_2'].components?.length > 0" [ngStyle]="{width: menu.subMenuLayout.columns['column_2'].width + '%'}">
+      <ng-container *ngFor="let component of menu.subMenuLayout.columns['column_2'].components" [appCMSComponent]="component"></ng-container>
+    </div>
+  </ng-container>
+</div>

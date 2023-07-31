@@ -1,0 +1,63 @@
+@import 'functions';
+
+:host {
+  display: block;
+  padding-right: 2rem;
+
+  @include media-breakpoint-down(sm) {
+    padding-right: 1rem;
+  }
+}
+
+.nav {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: auto;
+  gap: 10px;
+  // justify-content: flex-end;
+
+  @include media-breakpoint-down(sm) {
+    display: none;
+
+    &.show {
+      background: #fff;
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: block;
+      margin-top: rem(24);
+    }
+  }
+
+  & > app-nav-item {
+    height: 78px;
+  }
+}
+
+button {
+  padding: 0.25rem;
+  margin: 0;
+  outline: none;
+  border: none;
+  background: none;
+
+  i {
+    display: block;
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
+.menu-mobile-toggle {
+  display: none;
+  font-size: 22px;
+
+  @include media-breakpoint-down(sm) {
+    display: inline-block;
+  }
+}

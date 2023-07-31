@@ -1,0 +1,94 @@
+@import 'text-field';
+@include cdk-text-field();
+
+.input-control {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  input,
+  textarea,
+  select {
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #b8b7bc;
+    padding: 0;
+    height: 2rem;
+    font-size: 0.875rem;
+    &:focus ~ label,
+    &.cdk-text-field-autofilled ~ label,
+    &.has-value ~ label {
+      transform: translateY(-2em) perspective(100px) translateZ(0.001px);
+      font-size: 0.65rem;
+    }
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 0;
+    top: -4px;
+    box-sizing: content-box;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    display: flex;
+    font-size: 0.875rem;
+    align-items: center;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+      color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+      font-size 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  textarea {
+    height: 48px;
+    & + label {
+      top: 3px;
+      align-items: flex-start;
+    }
+  }
+
+  &.invalid {
+    color: red;
+    input, textarea {
+      border-bottom: 1px solid red;
+      color: red;
+    }
+    select {
+      border-bottom: 1px solid red;
+    }
+    .input-error {
+      display: block;
+    }
+  }
+
+  .las {
+    position: absolute;
+    font-size: 1.3rem;
+    top: 50%;
+    right: 2px;
+    transform: translateY(-70%);
+  }
+}
+
+.input-error {
+  display: none;
+  color: red;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: 0.65rem;
+  margin-top: -5px;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  padding-top: 1rem;
+  .btn {
+    margin-right: 1rem;
+  }
+}

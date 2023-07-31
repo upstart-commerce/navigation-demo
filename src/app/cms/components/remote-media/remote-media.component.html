@@ -1,0 +1,11 @@
+<ng-container *ngIf="data.attributes.field_media_link.iframe; else media">
+  <div [ngClass]="getClass()">
+    <div class="wrapper" [innerHTML]="bypassHtml(data.attributes.field_media_link.iframe)"></div>
+  </div>
+</ng-container>
+
+<ng-template #media>
+  <div [ngClass]="getClass()">
+    <iframe [src]="bypassUrl(data.attributes.field_media_link.uri+'embed')" frameborder="0"></iframe>
+  </div>
+</ng-template>

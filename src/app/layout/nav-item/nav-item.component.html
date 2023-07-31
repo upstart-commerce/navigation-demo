@@ -1,0 +1,106 @@
+<div class="menu-item">
+  <ng-container *ngIf="isIcon(menu)">
+    <ng-container [ngTemplateOutlet]="iconMenu" [ngTemplateOutletContext]="{$implicit: menu}"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="!isIcon(menu) && isLink(menu)">
+    <ng-container [ngTemplateOutlet]="linkMenu" [ngTemplateOutletContext]="{$implicit: menu}"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="!isLink(menu)">
+    <ng-container [ngTemplateOutlet]="simpleMenuItem" [ngTemplateOutletContext]="{$implicit: menu}"></ng-container>
+  </ng-container>
+</div>
+
+<ng-template #linkMenu let-menu>
+  <a
+    routerLinkActive="active"
+    class="menu-link"
+    [ngClass]="{
+      'mb-10': menu.children?.length,
+      'simple-link': menu.attributes.parent && (!menu.children || menu.children.length === 0)
+    }"
+    [routerLink]="menu.productCategoryData?.attributes?.link || menu.attributes?.link"
+    (click)="onMenuLinkClick(menu)"
+    >
+    {{ menu.attributes.title }}
+  </a>
+</ng-template>
+<ng-template #simpleMenuItem let-menu>
+  <span class="menu-text" [ngClass]="{'mb-10': menu.children?.length}">{{ menu.attributes.title }}</span>
+</ng-template>
+<ng-template #iconMenu let-menu>
+  <ng-container *ngIf="isLink(menu)">
+    <a [routerLink]="menu.productCategoryData?.attributes?.link || menu.attributes?.link" class="menu-icon menu-icon__link">
+      <span class="image-icon-container">
+        <img
+          [src]="decodeImageUrl(menu.iconData?.attributes?.uri.url)"
+          [alt]="menu.attributes.title"
+          width="48">
+      </span>
+      <span>{{menu.attributes.title}}</span>
+    </a>
+  </ng-container>
+  <ng-container *ngIf="!isLink(menu)">
+    <span  class="menu-icon menu-icon__text">
+      <img [src]="decodeImageUrl(menu.iconData?.attributes?.uri.url)" [alt]="menu.attributes.title" width="48">
+    </span>
+  </ng-container>
+</ng-template>
+
+<div class="submenu" *ngIf="menu.children?.length > 0" [ngClass]="{show: menu.attributes.expanded, root: !menu.attributes.parent}">
+  <div class="submenu-content">
+      <ng-container [ngSwitch]="menu.subMenuLayout.attributes?.field_sub_navigation_columns">
+        <ng-container *ngFor="let col3 of cols3">
+          <ng-container *ngSwitchCase="col3">
+            <ng-container [ngTemplateOutlet]="layout3Columns" [ngTemplateOutletContext]="{$implicit: menu}"></ng-container>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'100'">
+          <ng-container [ngTemplateOutlet]="layout1Column" [ngTemplateOutletContext]="{$implicit: menu}"></ng-container>
+        </ng-container>
+
+        <ng-container *ngFor="let col2 of cols2">
+          <ng-container *ngSwitchCase="col2">
+            <ng-container [ngTemplateOutlet]="layout2Columns" [ngTemplateOutletContext]="{$implicit: menu}"></ng-container>
+          </ng-container>
+        </ng-container>
+        
+        <ng-container *ngSwitchDefault>
+          <ng-container [ngTemplateOutlet]="defaultLayout" [ngTemplateOutletContext]="{$implicit: menu}"></ng-container>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="menu.subMenuLayout.attributes"></ng-container>
+  </div>
+</div>
+
+<ng-template #layout3Columns let-menu>
+  <ng-container *ngIf="menu.children">
+    <app-nav-col3-layout [menu]="menu"></app-nav-col3-layout>
+  </ng-container>
+</ng-template>
+<ng-template #layout2Columns let-menu>
+  <app-nav-col2-layout [menu]="menu"></app-nav-col2-layout>
+</ng-template>
+<ng-template #layout1Column>
+  <ng-container *ngIf="menu.children">
+    <div class="col-1-layout layout1Column" [ngClass]="menu.subMenuLayout.columns['column_1']?.['orientation']">
+      <ng-container *ngFor="let child of menu.children;let i = index">
+        <div>
+          <app-nav-item
+            *ngIf="menu.subMenuLayout.columns['column_'+(i + 1)]?.components.length === 0"
+            class="child"
+            [menu]="child"></app-nav-item>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</ng-template>
+<ng-template #defaultLayout let-menu>
+  <ng-container *ngIf="menu.children">
+    <div class="col-1-layout defaultLayout">
+      <ng-container *ngFor="let child of menu.children;let i = index">
+        <app-nav-item [menu]="child" class="child"></app-nav-item>
+      </ng-container>
+    </div>
+  </ng-container>
+</ng-template>

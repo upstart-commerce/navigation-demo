@@ -1,0 +1,36 @@
+<ng-container [ngSwitch]="data?.attributes?.field_images_layout">
+  <app-images-with-callout
+    *ngSwitchCase="componentsMap[componentsMap.image_with_callout]"
+    [text]="text"
+    [img]="desktopImage"
+    [text_box_position]="text_box_position"
+    [background_color]="background_color"
+    [link]="link"
+    [link_target]="link_target"
+    [call_to_action_text]="call_to_action_text"
+    [call_to_action_color]="call_to_action_color"
+    [call_to_action_text_color]="call_to_action_text_color"
+  ></app-images-with-callout>
+  <app-images-with-html *ngSwitchCase="componentsMap[componentsMap.image_with_html]"
+  [htmlValue]="htmlValue"
+    [img]="desktopImage"
+    [img_height]="height"
+    [img_width]="width"
+    [image_position]="image_position_column"
+    [imgLink]="calloutImgLink"
+    [link_target]="link_target"
+    ></app-images-with-html>
+  <app-images-with-text-and-cta *ngSwitchCase="componentsMap[componentsMap.image_with_text_and_cta]"
+    [text]="text"
+    [img]="desktopImage"
+    [text_box_position]="text_box_position"
+    [text_box_position_vertical]="text_box_position_vertical"
+    [img_height]="height"
+    [img_width]="width"
+    [link]="link"
+    [link_target]="link_target"
+    [call_to_action_text]="call_to_action_text"
+    [call_to_action_color]="call_to_action_color"
+    [call_to_action_text_color]="call_to_action_text_color"
+    ></app-images-with-text-and-cta>
+</ng-container>
